@@ -19,6 +19,7 @@ class NhanVienController extends Controller
     public function index()
     {
         $listSanPham = DB::table('nhan_viens')->whereNull('deleted_at')->orderBy('id','DESC')->paginate(5);
+        // dd($listSanPham);
         return view('admins.nhanviens.index',compact('listSanPham'));
     }
 

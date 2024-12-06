@@ -98,8 +98,7 @@
                                                 <td>{{ $item->ma_nhan_vien }}</td>
                                                 <td>{{ $item->ten_nhan_vien }}</td>
                                                 <td>{{ $item->ngay_vao_lam }}</td>
-                                                <td>{{ $item->luong }}</td>
-
+                                                <td>{{ $item->luong }} <label class="text-danger">$</label></td>
                                                 <td><img width="100px" height="80px" src="{{ Storage::url($item->hinh_anh) }}" alt=""></td>
 
                                                 <td>

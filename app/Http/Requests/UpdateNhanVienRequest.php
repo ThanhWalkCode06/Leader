@@ -26,7 +26,7 @@ class UpdateNhanVienRequest extends FormRequest
             'ten_nhan_vien' => 'required',
             'hinh_anh' => 'image',
             'ngay_vao_lam' => 'required',
-            'luong' => 'required|min:0',
+            'luong' => 'required|numeric|min:1',
         ];
     }
 }

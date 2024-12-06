@@ -1,7 +1,7 @@
 @extends('layouts.auth')
 
 @section('title')
-    Login
+    Reset
 @endsection
 
 @section('content')
@@ -26,25 +26,14 @@
 
                 <div class="card-body p-4">
                     <div class="text-center mt-2">
-                        <h5 class="text-primary">Welcome Back {{ session('success') ?? '' }} !</h5>
-                        <p class="text-muted">Sign in to continue to Velzon.</p>
+                        <h5 class="text-primary">Welcome Back !</h5>
+                        <p class="text-muted">Reset to continue to Velzon.</p>
                     </div>
                     <div class="p-2 mt-4">
-                        <form action="{{ route('restore.login') }}" method="post">
+                        <form action="{{ route('restore.getTokenOfPass',$token) }}" method="post">
                             @csrf
-                            <div class="mb-3">
-                                <label for="username" class="form-label">Username</label>
-                                <input type="text" class="form-control" id="username"
-                                placeholder="Enter username" value="{{ old('name') }}" name="name">
-                                @error('name')
-                                <p class="text-danger">{{ $message }}</p>
-                                @enderror
-                            </div>
 
                             <div class="mb-3">
-                                <div class="float-end">
-                                    <a href="{{ route('reset') }}" class="text-muted">Forgot password?</a>
-                                </div>
                                 <label class="form-label" for="password-input">Password</label>
                                 <div class="position-relative auth-pass-inputgroup mb-3">
                                     <input type="password" class="form-control pe-5 password-input" placeholder="Enter password"
@@ -56,22 +45,30 @@
                                 @enderror
                             </div>
 
-                            <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="{{ bin2hex(random_bytes(32)) }}" id="auth-remember-check" name="remember_token">
-                                <label class="form-check-label" for="auth-remember-check">Remember me</label>
+                            <div class="mb-3">
+                                <label class="form-label" for="confirm_password-input">Confirm Password</label>
+                                <div class="position-relative auth-pass-inputgroup mb-3">
+                                    <input type="confirm_password" class="form-control pe-5 password-input" placeholder="Enter password"
+                                    id="confirm_password-input" name="confirm_password">
+                                    <button class="btn btn-link position-absolute end-0 top-0 text-decoration-none text-muted password-addon material-shadow-none" type="button" id="password-addon"><i class="ri-eye-fill align-middle"></i></button>
+                                </div>
+                                @error('confirm_password')
+                                <p class="text-danger">{{ $message }}</p>
+                                @enderror
                             </div>
+
 
                             @error('error')
                                 <p class="text-danger">{{ $message }}</p>
                             @enderror
 
                             <div class="mt-4">
-                                <button class="btn btn-success w-100" type="submit">Sign In</button>
+                                <button class="btn btn-success w-100" type="submit">Reset</button>
                             </div>
 
                             {{-- <div class="mt-4 text-center">
                                 <div class="signin-other-title">
-                                    <h5 class="fs-13 mb-4 title">Sign In with</h5>
+                                    <h5 class="fs-13 mb-4 title">Reset with</h5>
                                 </div>
                                 <div>
                                     <button type="button" class="btn btn-primary btn-icon waves-effect waves-light"><i class="ri-facebook-fill fs-16"></i></button>

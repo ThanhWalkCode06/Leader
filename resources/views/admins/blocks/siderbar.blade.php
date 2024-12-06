@@ -82,7 +82,7 @@
                         </ul>
                     </div>
                 </li>
-                <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Bán hàng</span></li>
+                <li class="menu-title"><i class="ri-more-fill"></i> <span data-key="t-pages">Quản lý</span></li>
 
             </ul>
         </div>

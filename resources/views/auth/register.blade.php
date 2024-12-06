@@ -44,14 +44,16 @@
                                     @csrf
                                     <div class="mb-3">
                                         <label for="useremail" class="form-label">Email <span class="text-danger">*</span></label>
-                                        <input type="email" class="form-control" id="useremail" placeholder="Enter email address" required name="email">
+                                        <input type="email" class="form-control" id="useremail" placeholder="Enter email address"
+                                        required name="email" value="{{ old('email') }}">
                                             @error('email')
                                                 <p class="text-danger">{{ $message }}</p>
                                             @enderror
                                     </div>
                                     <div class="mb-3">
                                         <label for="username" class="form-label">Username <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" id="username" placeholder="Enter username" required name="name">
+                                        <input type="text" class="form-control" id="username" placeholder="Enter username" required name="name"
+                                        value="{{ old('name') }}">
                                         @error('name')
                                                 <p class="text-danger">{{ $message }}</p>
                                         @enderror

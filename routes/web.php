@@ -42,6 +42,15 @@ Route::post('/login/restore',[AuthController::class, 'login'])->name('restore.lo
 Route::get('/register',[AuthController::class, 'showRegister'])->name('register');
 Route::post('/register/restore',[AuthController::class, 'register'])->name('restore.register');
 
+Route::get('/reset',[AuthController::class, 'showReset'])->name('reset');
+Route::post('/reset/restore',[AuthController::class, 'storeReset'])->name('restore.reset');
+
+Route::get('/getTokenOfPass/{token}',[AuthController::class, 'showResetPass'])->name('getTokenOfPass');
+Route::post('/getTokenOfPass/{token}/restore',[AuthController::class, 'storeResetPass'])->name('restore.getTokenOfPass');
+
+Route::get('/pass/edit',[AuthController::class, 'editPass'])->name('edit.pass');
+Route::put('/pass/update',[AuthController::class, 'updatePass'])->name('update.pass');
+
 Route::get('/logout',[AuthController::class, 'logout'])->name('logout');
 
 // Route::get('/admin',[AdminSanPhamController::class, 'index'])->middleware(CheckRoleAdminMiddleware::class)->name('admin');
