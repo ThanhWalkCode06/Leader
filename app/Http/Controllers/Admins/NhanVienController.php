@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admins;
 
 use Carbon\Carbon;
 use App\Models\NhanVien;
+use App\Models\PhongBan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
@@ -18,15 +19,20 @@ class NhanVienController extends Controller
      */
     public function index()
     {
-        $listSanPham = DB::table('nhan_viens')->whereNull('deleted_at')->orderBy('id','DESC')->paginate(5);
+        $listSanPham = NhanVien::with('phongBan')->whereNull('deleted_at')
+        ->orderByDesc('id')
+        ->paginate(5);
         // dd($listSanPham);
         return view('admins.nhanviens.index',compact('listSanPham'));
     }
 
     public function search(Request $request){
-        $search = DB::table('nhan_viens')
+        $search = NhanVien::with('phongBan')
         ->where('ten_nhan_vien','like','%'.$request->key.'%')
         ->orwhere('ma_nhan_vien','like','%'.$request->key.'%')
+        ->orWhereHas('phongBan', function ($query) use ($request) {
+            $query->where('name', 'like', '%' . $request->key . '%'); // Tìm theo tên phòng ban
+        })
         ->orderBy('id','DESC')->paginate(5);
         return view('admins.nhanviens.index',compact('search'));
     }
@@ -36,7 +42,8 @@ class NhanVienController extends Controller
      */
     public function create()
     {
-        return view('admins.nhanviens.create');
+        $phong_bans = PhongBan::pluck('name','id')->all();
+        return view('admins.nhanviens.create',compact('phong_bans'));
     }
 
     /**
@@ -45,7 +52,6 @@ class NhanVienController extends Controller
     public function store(StoreNhanVienRequest $request)
     {
         $data = $request->validated();
-        // dd($data);
         if(file_exists($request->hinh_anh)){
             $file_path = $request->hinh_anh->store('uploads/nhanvien','public');
         }
@@ -65,10 +71,12 @@ class NhanVienController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Nhanvien $nhanvien)
     {
-        $itemId = DB::table('nhan_viens')->find($id);
-        return view('admins.nhanviens.edit',compact('itemId'));
+        $nhanvien->load('phongban');
+        $phong_bans = PhongBan::pluck('name','id')->all();
+        // dd($nhanvien);
+        return view('admins.nhanviens.edit',compact('nhanvien','phong_bans'));
     }
 
     /**
@@ -78,6 +86,7 @@ class NhanVienController extends Controller
     {
         $itemId = DB::table('nhan_viens')->find($id);
         $data = $request->validated();
+        // dd($data);
         $file_path = $itemId->hinh_anh;
         // dd(file_exists($request->hinh_anh));
 

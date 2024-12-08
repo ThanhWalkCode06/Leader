@@ -109,6 +109,19 @@
                                                     @enderror
                                                 </div>
 
+                                                <div class="mt-3">
+                                                    <label for="">Phòng Ban:</label>
+                                                    <select class="form-select form-select-sm"
+                                                    aria-label="Small select example" name="phong_ban_id">
+                                                        @foreach($phong_bans as $id => $phong_ban)
+                                                        <option value="{{ $id }}">{{ $phong_ban }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('phong_ban_id')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
+
 
                                                 <div class="mt-3 text-center">
                                                     <button class="btn btn-primary" type="submit">Thêm mới</button>

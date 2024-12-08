@@ -41,7 +41,7 @@
 
                         <div class="card-body">
                             <div class="live-preview">
-                                <form action="{{ route('nhanviens.update',$itemId->id) }}" method="POST" enctype="multipart/form-data">
+                                <form action="{{ route('nhanviens.update',$nhanvien) }}" method="POST" enctype="multipart/form-data">
                                     {{-- khi sử dụng form trong laravel bắt buộc phải có form @csrf  --}}
                                     @csrf
                                     @method('PUT')
@@ -52,7 +52,7 @@
                                                 <input type="text"
                                                     class="form-control @error('ma_nhan_vien') is-invalid @enderror"
                                                     name="ma_nhan_vien" id="ma_nhan_vien"
-                                                    value="{{ $itemId->ma_nhan_vien }}" readonly>
+                                                    value="{{ $nhanvien->ma_nhan_vien }}" readonly>
                                                 @error('ma_nhan_vien')
                                                     <p class="text-danger">{{ $message }}</p>
                                                 @enderror
@@ -64,7 +64,7 @@
                                                 <input type="text"
                                                     class="form-control @error('ten_nhan_vien') is-invalid @enderror"
                                                     name="ten_nhan_vien" id="ten_nhan_vien" placeholder="Nhập tên nhân viên"
-                                                    value="{{ $itemId->ten_nhan_vien }}">
+                                                    value="{{ $nhanvien->ten_nhan_vien }}">
                                                 @error('ten_nhan_vien')
                                                     <p class="text-danger">{{ $message }}</p>
                                                 @enderror
@@ -75,7 +75,7 @@
                                                     class="form-label @error('luong') is-invalid @enderror">Lương: </label>
                                                 <input type="number" step="0.01" class="form-control" id="luong"
                                                     name="luong" placeholder="Lương"
-                                                    value="{{ $itemId->luong }}" min="0">
+                                                    value="{{ $nhanvien->luong }}" min="0">
                                                 @error('luong')
                                                     <p class="text-danger">{{ $message }}</p>
                                                 @enderror
@@ -87,7 +87,7 @@
                                                     class="form-label @error('ngay_vao_lam') is-invalid @enderror">Ngày Vào
                                                     làm:</label>
                                                 <input type="date" class="form-control" name="ngay_vao_lam"
-                                                    id="ngay_vao_lam" value="{{ $itemId->ngay_vao_lam }}">
+                                                    id="ngay_vao_lam" value="{{ $nhanvien->ngay_vao_lam }}">
                                                 @error('ngay_vao_lam')
                                                     <p class="text-danger">{{ $message }}</p>
                                                 @enderror
@@ -104,12 +104,24 @@
                                                         ảnh</label>
                                                     <input type="file" class="form-control" name="hinh_anh"
                                                         id="hinh_anh" value="{{ old('hinh_anh') }}">
-                                                        <img width="100px" src="{{ Storage::url($itemId->hinh_anh) }}" alt="">
+                                                        <img width="100px" src="{{ Storage::url($nhanvien->hinh_anh) }}" alt="">
                                                     @error('hinh_anh')
                                                         <p class="text-danger">{{ $message }}</p>
                                                     @enderror
                                                 </div>
 
+                                                <div class="mt-3">
+                                                    <label for="">Phòng Ban:</label>
+                                                    <select class="form-select form-select-sm"
+                                                    aria-label="Small select example" name="phong_ban_id">
+                                                        @foreach($phong_bans as $id => $phong_ban)
+                                                        <option @selected($nhanvien->phong_ban_id == $id) value="{{ $id }}">{{ $phong_ban }}</option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('phong_ban_id')
+                                                        <p class="text-danger">{{ $message }}</p>
+                                                    @enderror
+                                                </div>
 
                                                 <div class="mt-3 text-center">
                                                     <button class="btn btn-primary" type="submit">Sửa</button>

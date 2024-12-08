@@ -27,6 +27,7 @@ class UpdateNhanVienRequest extends FormRequest
             'hinh_anh' => 'image',
             'ngay_vao_lam' => 'required',
             'luong' => 'required|numeric|min:1',
+            'phong_ban_id' => 'required',
         ];
     }
 }

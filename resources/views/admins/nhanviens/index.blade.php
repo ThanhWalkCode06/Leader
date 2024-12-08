@@ -81,6 +81,7 @@
                                                 <th scope="col">STT</th>
                                                 <th scope="col">Mã nhân viên</th>
                                                 <th scope="col">Tên nhân viên</th>
+                                                <th scope="col">Phòng Ban</th>
                                                 <th scope="col">Ngày vào làm</th>
                                                 <th scope="col">lương</th>
                                                 <th scope="col">Hình ảnh</th>
@@ -97,6 +98,7 @@
                                                 <td>{{ $index +1 }}</td>
                                                 <td>{{ $item->ma_nhan_vien }}</td>
                                                 <td>{{ $item->ten_nhan_vien }}</td>
+                                                <td>{{ $item->phongBan->name }}</td>
                                                 <td>{{ $item->ngay_vao_lam }}</td>
                                                 <td>{{ $item->luong }} <label class="text-danger">$</label></td>
                                                 <td><img width="100px" height="80px" src="{{ Storage::url($item->hinh_anh) }}" alt=""></td>

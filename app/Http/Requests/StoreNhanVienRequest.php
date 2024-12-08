@@ -27,6 +27,7 @@ class StoreNhanVienRequest extends FormRequest
             'hinh_anh' => 'required|image',
             'ngay_vao_lam' => 'required',
             'luong' => 'required|numeric|min:1',
+            'phong_ban_id' => 'required',
 
         ];
     }

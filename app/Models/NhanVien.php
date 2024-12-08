@@ -12,9 +12,14 @@ class NhanVien extends Model
 
     protected $fillable = [
         'ma_nhan_vien',
+        'phong_ban_id',
         'ten_nhan_vien',
         'hinh_anh
         ngay_vao_lam',
         'luong',
     ];
+
+    public function phongban() {
+        return $this->belongsTo(PhongBan::class, 'phong_ban_id');
+    }
 }
